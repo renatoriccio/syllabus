@@ -45,8 +45,6 @@ A database management system (DBMS) is **a kind of software for creating, manag
 
 In this module, you will learn to use a DBMS named "MongoDB Server" -- usually just called "MongoDB" (or "Mongo"). MongoDB stores data in a format similar to JSON (but not exactly the same). It also lets you use JavaScript to access the data.
 
-MongoDB is fairly popular, but it is not *the most* popular DBMS. More popular DBMSs use a coding language called "SQL" and store data in tables. You will learn MongoDB, though, so that you do not need to learn a new language or data format.
-
 With MongoDB, the JSON-like objects are called "**documents**". These documents are put in named groups called "**collections**". Each database in MongoDB is a named group of collections.
 
 ![Database with collections and documents](./assets/database.png)
@@ -476,17 +474,17 @@ Now, we should only get the one track with that ID (not an array).
 
 ## Optional: search operations
 
-### `$or`
+### `$in`
 
 What if we want to get tracks with the artist Justice *or* Sebastian? We have to check for either `"artist": "Justice"` *or* `"artist": "Sebastian"`.
 
-To get all documents with any of multiple field values, you can use the special `$or` key in your search object with an array value of other search objects.
+To get all documents with any of multiple field values, you can use the special `$in` key in your search object with an array value of other search objects.
 
 If we want all tracks by Justice or Sebastian, we can do this:
 
 ```js
 const searchObject = {
-  $or: [{ artist: "Justice" }, { artist: "Sebastian" }],
+  artist: { $in: ["Justice", "Sebastian" ]},
 };
 
 collection.find(searchObject);
@@ -503,7 +501,7 @@ app.get("/", function (request, response) {
     const collection = db.collection("tracks");
 
     const searchObject = {
-      $or: [{ artist: "Justice" }, { artist: "Sebastian" }],
+      artist: { $in: ["Justice", "Sebastian" ]},
     };
 
     collection.find(searchObject).toArray(function (error, tracks) {
@@ -516,12 +514,14 @@ app.get("/", function (request, response) {
 
 Now, when the user goes to `/`, they should only tracks by Justice and tracks by Sebastian.
 
+### `$or`
+
 What if we want
 
 1. tracks by Justice from 2007 and
 2. tracks by Sebastian from 2006?
 
-Here, we can just update our search objects like this:
+Since here we are searching for different conditions and not just on artist we have to use the `$or` operator:
 
 ```js
 const searchObject = {
