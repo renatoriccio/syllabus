@@ -149,11 +149,9 @@ Which is the callback function?
 - (b) `showString`
 - (c) `setTimeout`
 
-(2) Rewrite the code in the previous exercise so that there are no new function names.
+(2) Write a new function `sayHiAndRun(callback)` that takes a callback function, prints `Hi!`, and then runs the callback function.
 
-(3) Write a new function `sayHiAndRun(callback)` that takes a callback function, prints `Hi!`, and then runs the callback function.
-
-(4) Which other functions that you learned in CYF lessons take a callback function as an argument?
+(3) Which other functions that you learned in CYF lessons take a callback function as an argument?
 
 ## Connecting to a database from an Express server
 
