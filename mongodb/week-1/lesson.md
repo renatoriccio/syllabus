@@ -24,7 +24,7 @@ Read the Mentors Notes [here](./mentors.md)
 - IDs
 - Getting one document in a collection
 - Optional: search operations
-  - `$or`
+  - `$in`, `$or`
   - `$ne`, `$gt`, `$gte`, `$lt`, `$lte`
 
 ## What is a database?
